@@ -30,7 +30,7 @@ INCL_DIR		=	inc/
 
 # FILES ========================================================================
 
-NAME		= 	libft.a
+NAME_LIBFT	= 	libft.a
 
 SRCS_LIBFT	=	ft_isalnum.c ft_isprint.c ft_memcmp.c ft_putchar_fd.c ft_split.c \
 				ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
@@ -70,10 +70,10 @@ AR_FLAGS	=	-rc
 all:
 	@echo "\n${BIBlue}Compilation of Libft source files...${NC}"
 	@mkdir -p $(OBJS_DIR) $(OBJS_LIBFT_DIR) $(OBJS_PRINTF_DIR) $(OBJS_GNL_DIR)
-	@$(MAKE) --no-print-directory $(NAME)
+	@$(MAKE) --no-print-directory $(NAME_LIBFT)
 	@echo "\n${BIGreen}Libft Ready !${NC}"
 
-$(NAME): $(OBJS_LIBFT) $(OBJS_PRINTF) $(OBJS_GNL)
+$(NAME_LIBFT): $(OBJS_LIBFT) $(OBJS_PRINTF) $(OBJS_GNL)
 	@echo "\n${BICyan}Creating the library...${NC}"
 	$(AR) $(AR_FLAGS) $@ $^
 
@@ -93,7 +93,7 @@ clean:
 fclean:
 	@echo "\n${BIRed}Libft deletion...${NC}"
 	rm -rf $(OBJS_DIR)
-	rm -f $(NAME)
+	rm -f $(NAME_LIBFT)
 
 re: fclean all
 
