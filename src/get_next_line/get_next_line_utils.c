@@ -51,8 +51,9 @@ char	*ft_strndup(char *src, size_t start, size_t end)
 
 void	ft_clear_all_stash(char **stash)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < 1024)
 	{
 		if (stash[i])
