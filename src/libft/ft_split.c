@@ -17,6 +17,8 @@ static void	ft_freearray(char **array, size_t size)
 	size_t	i;
 
 	i = 0;
+	if (!array)
+		return ;
 	while (i < size)
 	{
 		free(array[i]);
@@ -75,7 +77,7 @@ char	**ft_split(char const *s, char c)
 	k = 0;
 	split_str = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (!split_str || !s)
-		return (NULL);
+		return (ft_freearray(split_str, 0), NULL);
 	while (i < ft_strlen(s))
 	{
 		while (s[i + j] && s[i + j] != c)
