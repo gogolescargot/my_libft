@@ -12,24 +12,59 @@
 
 #include "../inc/ft_printf.h"
 
-void	percent(const char *s, int *l, va_list argptr)
+void	put_char(char c, int *l)
 {
-	if (s[1] == 'c')
-		put_char(va_arg(argptr, int), l);
-	else if (s[1] == 's')
-		put_str(va_arg(argptr, char *), l);
-	else if (s[1] == 'p')
-		put_ptr(va_arg(argptr, void *), l);
-	else if (s[1] == 'd' || s[1] == 'i')
-		put_nbr(va_arg(argptr, int), 10, 0, l);
-	else if (s[1] == 'u')
-		put_nbr(va_arg(argptr, unsigned int), 10, 0, l);
-	else if (s[1] == 'x')
-		put_nbr(va_arg(argptr, unsigned int), 16, 0, l);
-	else if (s[1] == 'X')
-		put_nbr(va_arg(argptr, unsigned int), 16, 16, l);
-	else if (s[1] == '%')
-		put_char('%', l);
+	*l += write(1, &c, 1);
+}
+
+void	put_str(char *s, int *l)
+{
+	if (!s)
+		*l += write(1, "(null)", 6);
 	else
-		*l += write(1, s, 2);
+		*l += write(1, s, ft_strlen(s));
+}
+
+void	put_nbr(long nbr, int base, int uppercase, int *l)
+{
+	char	*table;
+
+	table = "0123456789abcdef0123456789ABCDEF";
+	if (nbr == -2147483648)
+	{
+		put_str("-2147483648", l);
+		return ;
+	}
+	if (nbr < 0)
+	{
+		put_char('-', l);
+		nbr *= -1;
+	}
+	if (nbr >= base)
+		put_nbr(nbr / base, base, uppercase, l);
+	put_char(table[nbr % base + uppercase], l);
+}
+
+void	putptr_rec(size_t p, int *l, char *base)
+{
+	if (p >= 16)
+		putptr_rec(p / 16, l, base);
+	put_char(base[p % 16], l);
+}
+
+void	put_ptr(void *p, int *l)
+{
+	char	*base;
+
+	base = "0123456789abcdef";
+	if (p == NULL)
+	{
+		put_str("(nil)", l);
+		return ;
+	}
+	else
+	{
+		put_str("0x", l);
+		putptr_rec((size_t)p, l, base);
+	}
 }
