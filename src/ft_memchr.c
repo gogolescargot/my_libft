@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 19:31:29 by ggalon            #+#    #+#             */
-/*   Updated: 2023/11/20 21:42:29 by ggalon           ###   ########.fr       */
+/*   Created: 2023/11/07 17:56:25 by ggalon            #+#    #+#             */
+/*   Updated: 2023/11/10 20:26:37 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../inc/libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t	i;
 
-int		ft_printf(const char *s, ...);
-
-size_t	ft_strlen(const char *s);
-void	percent(const char *s, int *l, va_list argptr);
-
-void	put_char(char c, int *l);
-void	put_str(char *s, int *l);
-void	put_ptr(void *p, int *l);
-void	put_nbr(long nbr, int base, int uppercase, int *l);
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+			return ((unsigned char *)s + i);
+		i++;
+	}
+	return (NULL);
+}

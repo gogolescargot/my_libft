@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 19:31:29 by ggalon            #+#    #+#             */
-/*   Updated: 2023/11/20 21:42:29 by ggalon           ###   ########.fr       */
+/*   Created: 2023/11/08 17:44:07 by ggalon            #+#    #+#             */
+/*   Updated: 2023/11/09 14:21:07 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../inc/libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-
-int		ft_printf(const char *s, ...);
-
-size_t	ft_strlen(const char *s);
-void	percent(const char *s, int *l, va_list argptr);
-
-void	put_char(char c, int *l);
-void	put_str(char *s, int *l);
-void	put_ptr(void *p, int *l);
-void	put_nbr(long nbr, int base, int uppercase, int *l);
-
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		ft_putnbr_fd(-2, fd);
+		ft_putnbr_fd(147483648, fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd (n % 10 + 48, fd);
+	}
+	else
+	{
+		ft_putchar_fd(n + 48, fd);
+	}
+}

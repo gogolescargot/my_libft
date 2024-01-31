@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 19:31:29 by ggalon            #+#    #+#             */
-/*   Updated: 2023/11/20 21:42:29 by ggalon           ###   ########.fr       */
+/*   Created: 2023/11/07 17:43:31 by ggalon            #+#    #+#             */
+/*   Updated: 2023/11/09 14:21:41 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../inc/libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
 
-int		ft_printf(const char *s, ...);
-
-size_t	ft_strlen(const char *s);
-void	percent(const char *s, int *l, va_list argptr);
-
-void	put_char(char c, int *l);
-void	put_str(char *s, int *l);
-void	put_ptr(void *p, int *l);
-void	put_nbr(long nbr, int base, int uppercase, int *l);
-
-#endif
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	return (0);
+}

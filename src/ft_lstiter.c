@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 19:31:29 by ggalon            #+#    #+#             */
-/*   Updated: 2023/11/20 21:42:29 by ggalon           ###   ########.fr       */
+/*   Created: 2023/11/09 20:27:29 by ggalon            #+#    #+#             */
+/*   Updated: 2023/11/11 17:54:07 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../inc/libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-
-int		ft_printf(const char *s, ...);
-
-size_t	ft_strlen(const char *s);
-void	percent(const char *s, int *l, va_list argptr);
-
-void	put_char(char c, int *l);
-void	put_str(char *s, int *l);
-void	put_ptr(void *p, int *l);
-void	put_nbr(long nbr, int base, int uppercase, int *l);
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}

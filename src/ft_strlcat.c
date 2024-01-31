@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 19:31:29 by ggalon            #+#    #+#             */
-/*   Updated: 2023/11/20 21:42:29 by ggalon           ###   ########.fr       */
+/*   Created: 2023/11/07 16:40:42 by ggalon            #+#    #+#             */
+/*   Updated: 2023/11/11 17:40:25 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../inc/libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	e;
+	size_t	i;
 
-int		ft_printf(const char *s, ...);
-
-size_t	ft_strlen(const char *s);
-void	percent(const char *s, int *l, va_list argptr);
-
-void	put_char(char c, int *l);
-void	put_str(char *s, int *l);
-void	put_ptr(void *p, int *l);
-void	put_nbr(long nbr, int base, int uppercase, int *l);
-
-#endif
+	e = ft_strlen(dst);
+	i = 0;
+	if (ft_strlen(dst) >= size)
+		return (size + ft_strlen(src));
+	while (i < size - e - 1 && src[i])
+	{
+		dst[e + i] = src[i];
+		i++;
+	}
+	dst[e + i] = '\0';
+	return (e + ft_strlen(src));
+}

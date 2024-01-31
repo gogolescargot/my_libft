@@ -12,48 +12,33 @@
 
 # DIRECTORIES ==================================================================
 
-SRCS_LIBFT_DIR	=	src/libft/
+SRCS_DIR_LIBFT	=	src/
 
-SRCS_PRINTF_DIR	=	src/ft_printf/
+OBJS_DIR_LIBFT	=	obj/
 
-SRCS_GNL_DIR	=	src/get_next_line/
-
-OBJS_DIR		=	obj/
-
-OBJS_LIBFT_DIR	=	$(OBJS_DIR)libft/
-
-OBJS_PRINTF_DIR	=	$(OBJS_DIR)ft_printf/
-
-OBJS_GNL_DIR	=	$(OBJS_DIR)get_next_line/
-
-INCL_DIR		=	inc/
+INCL_DIR_LIBFT	=	inc/
 
 # FILES ========================================================================
 
-NAME_LIBFT	= 	libft.a
+NAME_LIBFT		= 	libft.a
 
-SRCS_LIBFT	=	ft_isalnum.c ft_isprint.c ft_memcmp.c ft_putchar_fd.c ft_split.c \
-				ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
-				ft_itoa.c ft_memcpy.c ft_putendl_fd.c ft_strchr.c ft_strlcpy.c \
-				ft_strnstr.c ft_tolower.c ft_bzero.c ft_isascii.c ft_arrayclear.c \
-				ft_memmove.c ft_putnbr_fd.c ft_strdup.c ft_strlen.c ft_strrchr.c \
-				ft_toupper.c ft_calloc.c ft_isdigit.c ft_memchr.c ft_memset.c \
-				ft_putstr_fd.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_striteri.c
+FILE_C_LIBFT	=	ft_isalnum ft_isprint ft_memcmp ft_putchar_fd ft_split \
+					ft_strlcat ft_strncmp ft_substr ft_atoi ft_isalpha \
+					ft_itoa ft_memcpy ft_putendl_fd ft_strchr ft_strlcpy \
+					ft_strnstr ft_tolower ft_bzero ft_isascii ft_arrayclear \
+					ft_memmove ft_putnbr_fd ft_strdup ft_strlen ft_strrchr \
+					ft_toupper ft_calloc ft_isdigit ft_memchr ft_memset \
+					ft_putstr_fd ft_strjoin ft_strmapi ft_strtrim ft_striteri \
+					ft_printf ft_printf_put ft_printf_utils \
+					get_next_line get_next_line_utils
 
-SRCS_PRINTF =	ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_putunbr.c \
-				ft_putptr.c ft_puthexlowernbr.c ft_puthexuppernbr.c \
-				ft_countstr.c ft_countdecnbr.c ft_countdecunbr.c ft_counthexnbr.c \
-				ft_countptrnbr.c ft_percent_count.c ft_percent_put.c
+FILE_H_LIBFT	=	libft ft_printf get_next_line
 
-SRCS_GNL	=	get_next_line.c get_next_line_utils.c
+SRCS_LIBFT		=	$(addsuffix .c, $(addprefix $(SRCS_DIR_LIBFT), $(FILE_C_LIBFT)))
 
-OBJS_LIBFT	=	$(addprefix $(OBJS_LIBFT_DIR), $(SRCS_LIBFT:.c=.o))
+OBJS_LIBFT		=	$(addsuffix .o, $(addprefix $(OBJS_DIR_LIBFT), $(FILE_C_LIBFT)))
 
-OBJS_PRINTF	=	$(addprefix $(OBJS_PRINTF_DIR), $(SRCS_PRINTF:.c=.o))
-
-OBJS_GNL	=	$(addprefix $(OBJS_GNL_DIR), $(SRCS_GNL:.c=.o))
-
-INCL		=	$(addprefix $(INCL_DIR), libft.h get_next_line.h ft_printf.h)
+INCL_LIBFT		=	$(addsuffix .h, $(addprefix $(INCL_DIR_LIBFT), $(FILE_H_LIBFT)))
 
 # COMMANDS =====================================================================
 
@@ -69,30 +54,24 @@ AR_FLAGS	=	-rc
 
 all:
 	@echo "\n${BIBlue}Compilation of Libft source files...${NC}"
-	@mkdir -p $(OBJS_DIR) $(OBJS_LIBFT_DIR) $(OBJS_PRINTF_DIR) $(OBJS_GNL_DIR)
+	@mkdir -p $(OBJS_DIR_LIBFT)
 	@$(MAKE) --no-print-directory $(NAME_LIBFT)
 	@echo "\n${BIGreen}Libft Ready !${NC}"
 
-$(NAME_LIBFT): $(OBJS_LIBFT) $(OBJS_PRINTF) $(OBJS_GNL)
+$(NAME_LIBFT): $(OBJS_LIBFT)
 	@echo "\n${BICyan}Creating the library...${NC}"
 	$(AR) $(AR_FLAGS) $@ $^
 
-$(OBJS_LIBFT_DIR)%.o: $(SRCS_LIBFT_DIR)%.c $(INCL) Makefile
-	$(CC) $(CC_FLAGS) -c $< -o $@
-
-$(OBJS_PRINTF_DIR)%.o: $(SRCS_PRINTF_DIR)%.c $(INCL) Makefile
-	$(CC) $(CC_FLAGS) -c $< -o $@
-
-$(OBJS_GNL_DIR)%.o: $(SRCS_GNL_DIR)%.c $(INCL) Makefile
+$(OBJS_DIR_LIBFT)%.o: $(SRCS_DIR_LIBFT)%.c $(INCL_LIBFT) Makefile
 	$(CC) $(CC_FLAGS) -c $< -o $@
 
 clean:
 	@echo "\n${BIRed}Libft binary deletion...${NC}"
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR_LIBFT)
 
 fclean:
 	@echo "\n${BIRed}Libft deletion...${NC}"
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR_LIBFT)
 	rm -f $(NAME_LIBFT)
 
 re: fclean all
