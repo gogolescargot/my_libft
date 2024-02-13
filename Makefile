@@ -53,24 +53,24 @@ AR_FLAGS	=	-rc
 # RULES ========================================================================
 
 all:
-	@echo "\n${BIBlue}Compilation of Libft source files...${NC}"
-	@mkdir -p $(OBJS_DIR_LIBFT)
-	@$(MAKE) --no-print-directory $(NAME_LIBFT)
-	@echo "\n${BIGreen}Libft Ready !${NC}"
+	@ echo "\n${BIBlue}Compilation of Libft source files...${NC}"
+	@ mkdir -p $(OBJS_DIR_LIBFT)
+	@ $(MAKE) --no-print-directory $(NAME_LIBFT)
+	@ echo "\n${BIGreen}Libft Ready !${NC}"
 
 $(NAME_LIBFT): $(OBJS_LIBFT)
-	@echo "\n${BICyan}Creating the library...${NC}"
+	@ echo "\n${BICyan}Creating the library...${NC}"
 	$(AR) $(AR_FLAGS) $@ $^
 
 $(OBJS_DIR_LIBFT)%.o: $(SRCS_DIR_LIBFT)%.c $(INCL_LIBFT) Makefile
 	$(CC) $(CC_FLAGS) -c $< -o $@
 
 clean:
-	@echo "\n${BIRed}Libft binary deletion...${NC}"
+	@ echo "\n${BIRed}Libft binary deletion...${NC}"
 	rm -rf $(OBJS_DIR_LIBFT)
 
 fclean:
-	@echo "\n${BIRed}Libft deletion...${NC}"
+	@ echo "\n${BIRed}Libft deletion...${NC}"
 	rm -rf $(OBJS_DIR_LIBFT)
 	rm -f $(NAME_LIBFT)
 
