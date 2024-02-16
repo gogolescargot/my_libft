@@ -27,8 +27,10 @@ FILE_C_LIBFT	=	ft_isalnum ft_isprint ft_memcmp ft_putchar_fd ft_split \
 					ft_itoa ft_memcpy ft_putendl_fd ft_strchr ft_strlcpy \
 					ft_strnstr ft_tolower ft_bzero ft_isascii ft_arrayclear \
 					ft_memmove ft_putnbr_fd ft_strdup ft_strlen ft_strrchr \
-					ft_toupper ft_calloc ft_isdigit ft_memchr ft_memset \
+					ft_toupper ft_calloc ft_isdigit ft_memchr ft_memset ft_free \
 					ft_putstr_fd ft_strjoin ft_strmapi ft_strtrim ft_striteri \
+					ft_lstsize ft_lstadd_back ft_lstadd_front ft_lstiter \
+					ft_lstclear ft_lstdelone ft_lstlast ft_lstnew ft_lstmap \
 					ft_printf ft_printf_utils \
 					get_next_line get_next_line_utils
 
