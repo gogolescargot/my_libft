@@ -21,8 +21,8 @@ void	ft_arrayclear(char **array)
 		return ;
 	while (array[i])
 	{
-		free(array[i]);
+		ft_free(array[i]);
 		i++;
 	}
-	free(array);
+	ft_free(array);
 }
