@@ -46,7 +46,7 @@ INCL_LIBFT		=	$(addsuffix .h, $(addprefix $(INCL_DIR_LIBFT), $(FILE_H_LIBFT)))
 
 CC			=	cc
 
-CC_FLAGS	=	-Wall -Wextra -Werror
+CC_FLAGS	=	-Wall -Wextra -Werror -I $(INCL_DIR_LIBFT)
 
 AR			=	ar
 
