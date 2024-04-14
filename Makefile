@@ -14,7 +14,7 @@
 
 SRCS_DIR_LIBFT	=	src/
 
-OBJS_DIR_LIBFT	=	obj/
+OBJS_DIR_LIBFT	=	.obj/
 
 INCL_DIR_LIBFT	=	inc/
 
